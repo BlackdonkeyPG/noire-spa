@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOIRE | Massage & Bodywork</title>
+
+<style>
+:root {
+  --bg:#0e0e0e;
+  --card:#161616;
+  --text:#f2f2f2;
+  --muted:#9a9a9a;
+  --gold:#c9a24d;
+  --crimson:#7a1f1f;
+}
+
+* {
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body {
+  margin:0;
+  padding:1.2rem;
+  background:var(--bg);
+  color:var(--text);
+}
+
+h1,h2 {
+  font-weight:300;
+  letter-spacing:.05em;
+}
+
+h1 {
+  text-align:center;
+  margin-top:.5rem;
+}
+
+p {
+  line-height:1.6;
+}
+
+.card {
+  background:var(--card);
+  border-radius:18px;
+  padding:1.2rem;
+  margin:1.2rem 0;
+}
+
+button {
+  width:100%;
+  padding:1rem;
+  border-radius:14px;
+  border:none;
+  background:var(--gold);
+  color:#000;
+  font-size:1rem;
+}
+
+iframe {
+  width:100%;
+  border:none;
+  border-radius:16px;
+}
+
+/* BODY MAP */
+.body-map-container {
+  display:flex;
+  justify-content:center;
+  gap:1.2rem;
+  flex-wrap:wrap;
+  margin-top:1rem;
+}
+
+.body-map {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width:240px;
+}
+
+.body-label {
+  color:var(--gold);
+  letter-spacing:.08em;
+  margin-bottom:.5rem;
+}
+
+svg {
+  width:100%;
+  height:auto;
+}
+
+.zone rect {
+  fill:#1a1a1a;
+  stroke:#444;
+  stroke-width:2.5;
+  transition:.25s ease;
+  cursor:pointer;
+}
+
+.zone.focus rect {
+  fill:rgba(201,162,77,.35);
+  stroke:var(--gold);
+}
+
+.zone.avoid rect {
+  fill:#1a1a1a;
+  stroke:var(--crimson);
+}
+</style>
+</head>
+
+<body>
+
+<h1>NOIRE</h1>
+<p style="text-align:center;color:var(--muted)">
+Massage & Bodywork<br>Slow. Intentional. Yours.
+</p>
+
+<!-- BOOKING -->
+<section class="card">
+<h2>Reserve Your Time</h2>
+<p style="color:var(--muted)">
+Availability shown below. Payment in person.
+</p>
+
+<!-- Replace with your Google Appointment Schedule -->
+<iframe src="https://calendar.google.com/calendar/appointments/your-link" height="600"></iframe>
+</section>
+
+<form>
+
+<!-- BODY FOCUS -->
+<section class="card">
+<h2>Body Focus</h2>
+<p style="color:var(--muted)">Tap once to focus. Tap again to avoid.</p>
+
+<div class="body-map-container">
+
+<!-- FRONT -->
+<div class="body-map">
+<div class="body-label">FRONT</div>
+<svg viewBox="0 0 200 520">
+  <g class="zone" data-area="Neck"><rect x="85" y="20" width="30" height="30" rx="10"/></g>
+  <g class="zone" data-area="Chest"><rect x="60" y="55" width="80" height="60" rx="25"/></g>
+  <g class="zone" data-area="Abdomen"><rect x="65" y="120" width="70" height="80" rx="25"/></g>
+  <g class="zone" data-area="Hips"><rect x="55" y="205" width="90" height="45" rx="25"/></g>
+
+  <g class="zone" data-area="Left Arm"><rect x="15" y="55" width="30" height="140" rx="18"/></g>
+  <g class="zone" data-area="Right Arm"><rect x="155" y="55" width="30" height="140" rx="18"/></g>
+
+  <g class="zone" data-area="Left Leg"><rect x="70" y="255" width="25" height="170" rx="18"/></g>
+  <g class="zone" data-area="Right Leg"><rect x="105" y="255" width="25" height="170" rx="18"/></g>
+</svg>
+</div>
+
+<!-- BACK -->
+<div class="body-map">
+<div class="body-label">BACK</div>
+<svg viewBox="0 0 200 520">
+  <g class="zone" data-area="Upper Back"><rect x="60" y="35" width="80" height="70" rx="25"/></g>
+  <g class="zone" data-area="Lower Back"><rect x="65" y="110" width="70" height="65" rx="25"/></g>
+  <g class="zone" data-area="Glutes"><rect x="55" y="180" width="90" height="45" rx="25"/></g>
+
+  <g class="zone" data-area="Back Left Arm"><rect x="15" y="35" width="30" height="150" rx="18"/></g>
+  <g class="zone" data-area="Back Right Arm"><rect x="155" y="35" width="30" height="150" rx="18"/></g>
+
+  <g class="zone" data-area="Back Left Leg"><rect x="70" y="235" width="25" height="190" rx="18"/></g>
+  <g class="zone" data-area="Back Right Leg"><rect x="105" y="235" width="25" height="190" rx="18"/></g>
+</svg>
+</div>
+
+</div>
+
+<input type="hidden" id="bodyData">
+</section>
+
+<!-- WAIVER -->
+<section class="card">
+<h2>Consent & Agreement</h2>
+<p style="font-size:.9rem;color:var(--muted)">
+Services provided by NOIRE are non-medical, non-therapeutic massage services for relaxation and general wellness only.
+NOIRE is not a Registered Massage Therapist (RMT). Services are not eligible for insurance reimbursement.
+<br><br>
+Consent is ongoing and may be withdrawn at any time. All services are strictly professional and non-sexual.
+</p>
+<label><input type="checkbox" required> I agree</label>
+</section>
+
+<button type="submit">Submit Preferences</button>
+</form>
+
+<script>
+const zones=document.querySelectorAll('.zone');
+const selections={};
+
+zones.forEach(zone=>{
+  zone.addEventListener('click',()=>{
+    const area=zone.dataset.area;
+
+    if(!zone.classList.contains('focus')&&!zone.classList.contains('avoid')){
+      zone.classList.add('focus');
+      selections[area]='Focus';
+    } else if(zone.classList.contains('focus')){
+      zone.classList.remove('focus');
+      zone.classList.add('avoid');
+      selections[area]='Avoid';
+    } else {
+      zone.classList.remove('avoid');
+      delete selections[area];
+    }
+
+    document.getElementById('bodyData').value=JSON.stringify(selections);
+  });
+});
+</script>
+
+</body>
+</html>
